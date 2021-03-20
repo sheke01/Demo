@@ -1,0 +1,120 @@
+use walking;
+
+drop table ConfirmationToken;
+drop table product_order;
+drop table orders;
+drop table products;
+drop table expenses;
+drop table customers;
+drop table employees; 
+
+CREATE TABLE Employees (
+  emp_id int(11) NOT NULL AUTO_INCREMENT,
+  first_name varchar(128) NOT NULL,
+  last_name varchar(45) NOT NULL,
+  ssn int(9) NOT NULL,
+  street_address varchar(45) NOT NULL,
+  city varchar(45) NOT NULL,
+  state varchar(15) NOT NULL,
+  zip_Code varchar(10) NOT NULL,
+  country varchar(15) NOT NULL,
+  phone_number int(10) NOT NULL,
+  email varchar(30) NOT NULL,
+  shop_Number int(2) NOT NULL,
+  emp_type varchar(15) NOT NULL,
+  username varchar(256) NOT NULL,
+  password varchar(1024) NOT NULL,
+  enabled boolean NOT NULL,
+  
+  PRIMARY KEY (emp_id),
+  UNIQUE KEY `ssn_UNIQUE` (ssn)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+delete from employees;
+
+CREATE TABLE Customers (
+  cust_id int(11) NOT NULL AUTO_INCREMENT,
+  first_name varchar(128) NOT NULL,
+  last_name varchar(45) NOT NULL,
+  street_address varchar(45) NOT NULL,
+  city varchar(45) NOT NULL,
+  state varchar(15) NOT NULL,
+  zip_Code varchar(10) NOT NULL,
+  country varchar(15) NOT NULL,
+  phone_number int(10) NOT NULL,
+  email varchar(30) NOT NULL,
+  rol varchar(15) NOT NULL,
+  username varchar(21) NOT NULL,
+  pass varchar(35) NOT NULL,
+  enabled boolean NOT NULL,
+  
+  PRIMARY KEY (cust_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
+
+select * from customers;
+
+CREATE TABLE Products (
+  product_id int(11) NOT NULL AUTO_INCREMENT,
+  product_name varchar(128) NOT NULL,
+  product_type varchar(45) NOT NULL,
+  manufacturer_code varchar(45) NOT NULL,
+  product_price double NOT NULL,
+  in_Stock int(10) NOT NULL,
+  
+  PRIMARY KEY (product_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
+
+select * from products;
+
+CREATE TABLE Expenses (
+  expense_id int(11) NOT NULL AUTO_INCREMENT,
+  descript varchar(45) NOT NULL,
+  expense_total double NOT NULL,
+  expense_date date NOT NULL,
+  employee_id int(10) NOT NULL,
+  
+  PRIMARY KEY (expense_id),
+  foreign key (employee_id) references Employees(emp_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
+
+select * from expenses;
+
+CREATE TABLE Orders (
+  order_id int(11) NOT NULL AUTO_INCREMENT,
+  payment_method varchar(45) NOT NULL,
+  order_type varchar(15) NOT NULL,
+  order_date date NOT NULL,
+  employee_id int(10) NOT NULL,
+  customer_id int(10) NOT NULL,
+  
+  PRIMARY KEY (order_id),
+  foreign key (employee_id) references Employees(emp_id),
+  foreign key (customer_id) references Customers(cust_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
+
+select * from orders;
+
+CREATE TABLE Product_Order (
+  orders_id int(11),
+  products_id int(11),
+  
+  foreign key (orders_id) references Orders(order_id),
+  foreign key (products_id) references Products(product_id)
+  );
+  
+select * from product_order;
+
+CREATE TABLE confirmation_token (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  token varchar(45) NOT NULL,
+  created_at DATETIME(6) NOT NULL,
+  expires_at DATETIME(6) NOT NULL,
+  confirmed_at DATETIME(6) NOT NULL,
+  user_id int(10) NOT NULL,
+  
+  PRIMARY KEY (id),
+  foreign key (user_id) references Employees(emp_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+select * from confirmation_token;
+delete from confirmation_token;
