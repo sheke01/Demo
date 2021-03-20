@@ -1,0 +1,17 @@
+{
+	 "firstName": "Peter",
+	 "lastName" : "Pan",
+	 "email" : "maricharlotte226@gmail.com",
+	 "password" : "yfygu",
+     "ssn" : 234563458,
+     "phoneNumber" : 218358029,
+     "shopNumber" : 1,
+     "address": {
+            "streetAddress": "4 Madison Avenue",
+            "city": "Los Angeles",
+            "state": "CA",
+            "zipCode": "54107",
+            "country": "USA"
+        }
+
+}
