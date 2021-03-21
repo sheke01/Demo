@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,6 +17,7 @@ import com.sheke.walking.registration.Token.ConfirmationToken;
 import com.sheke.walking.registration.Token.ConfirmationTokenService;
 import com.sheke.walking.repo.EmployeeRepository;
 
+@Primary
 @Service
 public class EmployeeService implements UserDetailsService{
 	
