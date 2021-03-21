@@ -77,7 +77,7 @@ public class EmployeeService implements UserDetailsService{
 
         employeeRepo.save(employee);
 
-        String token = UUID.randomUUID().toString();
+       String token = UUID.randomUUID().toString();
 
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
@@ -86,8 +86,7 @@ public class EmployeeService implements UserDetailsService{
                 employee
         );
 
-        confirmationTokenService.saveConfirmationToken(
-                confirmationToken);
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
 
 //        TODO: SEND EMAIL
 

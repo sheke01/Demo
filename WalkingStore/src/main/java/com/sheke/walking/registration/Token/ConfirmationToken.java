@@ -1,6 +1,7 @@
 package com.sheke.walking.registration.Token;
 
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -16,9 +17,14 @@ import org.hibernate.annotations.CreationTimestamp;
 import com.sheke.walking.model.Employees;
 
 @Entity
-public class ConfirmationToken {
+public class ConfirmationToken implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4616817333411031867L;
+
+	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(nullable=false,updatable=false)
     private int id;
@@ -27,15 +33,15 @@ public class ConfirmationToken {
     private String token;
 
     @Column(nullable = false)
-    @CreationTimestamp
+    //@CreationTimestamp
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    @CreationTimestamp
+    //@CreationTimestamp
     private LocalDateTime expiresAt;
 
-    @CreationTimestamp
-    private LocalDateTime confirmedAt;
+    //@CreationTimestamp
+    private LocalDateTime confirmedAt ;
 
     @ManyToOne
     @JoinColumn(
@@ -49,10 +55,12 @@ public class ConfirmationToken {
     		LocalDateTime expiresAt,
                              Employees employee) {
         this.token = token;
-        this.createdAt = createdAt;
+        this.createdAt = createdAt; 
         this.expiresAt = expiresAt;
         this.employee = employee;
     }
+    
+    public ConfirmationToken() {}
 
 	public int getId() {
 		return id;

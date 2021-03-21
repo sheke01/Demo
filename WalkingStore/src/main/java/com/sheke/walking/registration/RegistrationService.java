@@ -37,7 +37,7 @@ public class RegistrationService {
 	            throw new IllegalStateException("email not valid");
 	        }
 		 
-		 String token = employeeService.signUpEmployee(
+		 String token =  employeeService.signUpEmployee(
 	                new Employees(
 	                        request.getFirstName(),
 	                        request.getLastName(),
